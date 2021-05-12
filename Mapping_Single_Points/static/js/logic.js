@@ -2,7 +2,7 @@
 console.log("working");
 
 // Create the map object with a center and zoom level.
-var map = L.map('mapid').setView([34.0522, -118.2437], 14);
+var map = L.map('mapid').setView([40.7, -94.5], 4);
 
 // Alternative to setView above
 // let map = L.map("mapid", {
@@ -16,7 +16,8 @@ var map = L.map('mapid').setView([34.0522, -118.2437], 14);
 let streets = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
-    id: 'mapbox/dark-v10',
+    //id: 'mapbox/dark-v10',
+    id: 'mapbox/streets-v11',
     // https://docs.mapbox.com/api/maps/styles/
     tileSize: 512,
     zoomOffset: -1,
@@ -35,10 +36,31 @@ let streets = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{
 //     .bindPopup('Welcome to LA.<br> go see LACMA Lights.')
 //     .openPopup();
 
-let marker = L.circleMarker([34.0522, -118.2437], {
-    radius: 300,
-    color: "black",
-    fillColor: "#ffffa1"
-    }).addTo(map)
-    .bindPopup('Welcome to LA.<br> go see LACMA Lights.')
-    .openPopup();
+// let marker = L.circleMarker([34.0522, -118.2437], {
+//         radius: 300,
+//         color: "black",
+//         fillColor: "#ffffa1"
+//     }).addTo(map)
+//     .bindPopup('Welcome to LA.<br> go see LACMA Lights.')
+//     .openPopup();
+
+
+// Get data from cities.js
+let cityData = cities;
+
+// Loop through the cities array and create one marker for each city.
+// cityData.forEach(function(city) {
+//     console.log(city);
+//     L.marker(city.location, {
+//         radius: 300
+//     }).addTo(map).bindPopup("<h2>" + city.city + ", " + city.state + "</h2> <hr> <h3>Population " + city.population.toLocaleString() + "</h3>")
+// });
+
+// Loop through the cities array and create one circleMarker for each city.
+cityData.forEach(function(city) {
+    console.log(city);
+    L.circleMarker(city.location, {
+        radius: city.population/100000,
+        color: 'orange'
+    }).addTo(map).bindPopup("<h2>" + city.city + ", " + city.state + "</h2> <hr> <h3>Population " + city.population.toLocaleString() + "</h3>")
+});
