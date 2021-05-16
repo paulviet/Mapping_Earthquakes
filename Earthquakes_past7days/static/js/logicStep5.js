@@ -131,6 +131,7 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
       div.innerHTML +=
         '<i style="background:' + getColor(magnitudes[i] + 1) + '"></i> ' +
         magnitudes[i] + (magnitudes[i + 1] ? '&ndash;' + magnitudes[i + 1] + '<br>' : '+');
+                        // TRUE/FALSE ? X : Y
     }
     return div;
   };
